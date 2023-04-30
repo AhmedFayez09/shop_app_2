@@ -103,15 +103,15 @@ class _TestScreenState extends State<TestScreen> {
                       snapshot.data!.docs.map((e) => e.data()).toList();
 
                   return Expanded(
-                      child: SingleChildScrollView(
-                    child: GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 1.0,
-                      childAspectRatio: 1 / 1.70,
-                      mainAxisSpacing: 1.0,
-                      children: List.generate(
+                    child: SingleChildScrollView(
+                      child: GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 1.0,
+                        childAspectRatio: 1 / 1.70,
+                        mainAxisSpacing: 1.0,
+                        children: List.generate(
                           product.length,
                           (index) =>
 
@@ -120,148 +120,144 @@ class _TestScreenState extends State<TestScreen> {
                               //   context: context,
                               // ),
                               Container(
-                                color: Colors.white,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                            color: Colors.white,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Stack(
+                                  alignment: AlignmentDirectional.bottomStart,
                                   children: [
-                                    Stack(
-                                      alignment:
-                                          AlignmentDirectional.bottomStart,
-                                      children: [
-                                        Image(
-                                          image: NetworkImage(
-                                              product[index].imageUrl),
-                                          width: double.infinity,
-                                          height: 200,
-                                        ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(product[index].name,
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                      height: 1.3)),
-                                              IconButton(
-                                                onPressed: () {
-                                                  MedicalProductModel favModel =
-                                                      MedicalProductModel(
-                                                    id: product[index].id,
-                                                    imageUrl:
-                                                        product[index].imageUrl,
-                                                    name: product[index].name,
-                                                    price: product[index].price,
-                                                    totalPrice:product[index].price ,
-                                                    inCart: true,
-                                                  );
-                                                  ShopCubit.get(context)
-                                                      .addTOCart(favModel)
-                                                      .then((value) async {
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .doc(
-                                                            'test/${product[index].id}')
-                                                        .update(
-                                                            {'inCart': true});
-                                                    // final totlePrice = profile.userData != null ? profile.userData!.totalPrice : 0;
-                                                    // final totle = totlePrice + int.parse(product[index].price);
-                                                    // FirebaseFirestore.instance.doc('Users/$userId').
-                                                    // update(
-                                                    //   {
-                                                    //     'totalPrice' : totle
-                                                    //   }
-                                                    // ).asStream();
-                                                  });
-                                                },
-                                                icon: CircleAvatar(
-                                                  backgroundColor:
-                                                      product[index].inCart ==
-                                                              true
-                                                          ? defaultColor
-                                                          : Colors.grey,
-                                                  radius: 15.0,
-                                                  child: const Icon(
-                                                    Icons.add_shopping_cart,
-                                                    size: 18,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                '\$ ${product[index].price}',
-                                                style: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: defaultColor,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10),
-                                              const Spacer(),
-                                              IconButton(
-                                                alignment: AlignmentDirectional
-                                                    .bottomEnd,
-                                                onPressed: () {
-                                                  MedicalProductModel favModel =
-                                                      MedicalProductModel(
-                                                    id: product[index].id,
-                                                    imageUrl:
-                                                        product[index].imageUrl,
-                                                    name: product[index].name,
-                                                    price: product[index].price,
-                                                    totalPrice:product[index].price ,
-                                                    inFavorites: true,
-                                                  );
-                                                  ShopCubit.get(context)
-                                                      .addTOFav(favModel)
-                                                      .then((value) async {
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .doc(
-                                                            'test/${product[index].id}')
-                                                        .update({
-                                                      'inFavorites': true
-                                                    });
-                                                  });
-                                                },
-                                                icon: CircleAvatar(
-                                                  radius: 15.0,
-                                                  backgroundColor: product[
-                                                                  index]
-                                                              .inFavorites ==
-                                                          true
-                                                      ? defaultColor
-                                                      : Colors.grey,
-                                                  child: const Icon(
-                                                    Icons.favorite_border,
-                                                    size: 14.0,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                    Image(
+                                      image:
+                                          NetworkImage(product[index].imageUrl),
+                                      width: double.infinity,
+                                      height: 200,
                                     ),
                                   ],
                                 ),
-                              )),
+                                Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(product[index].name,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style:
+                                                  const TextStyle(height: 1.3)),
+                                          IconButton(
+                                            onPressed: () {
+                                              MedicalProductModel favModel =
+                                                  MedicalProductModel(
+                                                id: product[index].id,
+                                                imageUrl:
+                                                    product[index].imageUrl,
+                                                name: product[index].name,
+                                                price: product[index].price,
+                                                totalPrice:
+                                                    product[index].price,
+                                                inCart: true,
+                                              );
+                                              ShopCubit.get(context)
+                                                  .addTOCart(favModel)
+                                                  .then((value) async {
+                                                await FirebaseFirestore.instance
+                                                    .doc(
+                                                        'test/${product[index].id}')
+                                                    .update({'inCart': true});
+                                                // final totlePrice = profile.userData != null ? profile.userData!.totalPrice : 0;
+                                                // final totle = totlePrice + int.parse(product[index].price);
+                                                // FirebaseFirestore.instance.doc('Users/$userId').
+                                                // update(
+                                                //   {
+                                                //     'totalPrice' : totle
+                                                //   }
+                                                // ).asStream();
+                                              });
+                                            },
+                                            icon: CircleAvatar(
+                                              backgroundColor:
+                                                  product[index].inCart == true
+                                                      ? defaultColor
+                                                      : Colors.grey,
+                                              radius: 15.0,
+                                              child: const Icon(
+                                                Icons.add_shopping_cart,
+                                                size: 18,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            '\$ ${product[index].price}',
+                                            style: const TextStyle(
+                                              fontSize: 12,
+                                              color: defaultColor,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          const Spacer(),
+                                          IconButton(
+                                            alignment:
+                                                AlignmentDirectional.bottomEnd,
+                                            onPressed: () {
+                                              MedicalProductModel favModel =
+                                                  MedicalProductModel(
+                                                id: product[index].id,
+                                                imageUrl:
+                                                    product[index].imageUrl,
+                                                name: product[index].name,
+                                                price: product[index].price,
+                                                totalPrice:
+                                                    product[index].price,
+                                                inFavorites: true,
+                                              );
+                                              ShopCubit.get(context)
+                                                  .addTOFav(favModel)
+                                                  .then((value) async {
+                                                await FirebaseFirestore.instance
+                                                    .doc(
+                                                        'test/${product[index].id}')
+                                                    .update(
+                                                        {'inFavorites': true});
+                                              });
+                                            },
+                                            icon: CircleAvatar(
+                                              radius: 15.0,
+                                              backgroundColor:
+                                                  product[index].inFavorites ==
+                                                          true
+                                                      ? defaultColor
+                                                      : Colors.grey,
+                                              child: const Icon(
+                                                Icons.favorite_border,
+                                                size: 14.0,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  ));
+                  );
                 },
               ),
             ],

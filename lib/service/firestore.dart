@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shop_app_2/medical/presentation/models/add_to_cart_to_admin_model.dart';
 import 'package:shop_app_2/medical/presentation/models/medical_product_model.dart';
 import 'package:shop_app_2/medical/presentation/models/user_model.dart';
 
@@ -16,11 +17,34 @@ CollectionReference<MedicalProductModel> getDataFromFirebase(
   );
 }
 
+CollectionReference<AddToAllCartToAdmin> getDataFromFirebaseToSendAdmin(
+    String nameCollection) {
+  return FirebaseFirestore.instance
+      .collection(nameCollection)
+      .withConverter<AddToAllCartToAdmin>(
+    fromFirestore: (docSnapshot, _) {
+      return AddToAllCartToAdmin.fromJson(docSnapshot.data()!);
+    },
+    toFirestore: (clientM, _) {
+      return clientM.toJson();
+    },
+  );
+}
+
 Future addProductToFireStore(
     MedicalProductModel product, String nameCollection) {
   CollectionReference<MedicalProductModel> collection =
       getDataFromFirebase(nameCollection);
   DocumentReference<MedicalProductModel> doc = collection.doc();
+  product.id = doc.id;
+  return doc.set(product);
+}
+
+Future addListProCartToAdmin(
+    AddToAllCartToAdmin product, String nameCollection) {
+  CollectionReference<AddToAllCartToAdmin> collection =
+      getDataFromFirebaseToSendAdmin(nameCollection);
+  DocumentReference<AddToAllCartToAdmin> doc = collection.doc();
   product.id = doc.id;
   return doc.set(product);
 }

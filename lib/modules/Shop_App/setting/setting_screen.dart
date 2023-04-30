@@ -26,11 +26,9 @@ class SettingScreen extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      if(state is ShopLoadingUpdateUserState)
-                      LinearProgressIndicator(),
-                      const SizedBox(
-                        height: 20
-                      ),
+                      if (state is ShopLoadingUpdateUserState)
+                        LinearProgressIndicator(),
+                      const SizedBox(height: 20),
                       defaultFormField(
                         onValidate: (String? value) {
                           if (value == null || value.isEmpty) {
@@ -39,7 +37,9 @@ class SettingScreen extends StatelessWidget {
                           return null;
                         },
                         prefix: Icons.person_outline,
-                        initialValue: profile.userData != null ? profile.userData!.name : 'Loading...' ,
+                        initialValue: profile.userData != null
+                            ? profile.userData!.name
+                            : 'Loading...',
                         // controller: nameController,
 
                         type: TextInputType.name,
@@ -49,7 +49,9 @@ class SettingScreen extends StatelessWidget {
                         height: 20,
                       ),
                       defaultFormField(
-                        initialValue: profile.userData != null ? profile.userData!.email : 'Loading',
+                        initialValue: profile.userData != null
+                            ? profile.userData!.email
+                            : 'Loading',
                         onValidate: (String? value) {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter Your Email Address!!';
@@ -65,7 +67,9 @@ class SettingScreen extends StatelessWidget {
                         height: 20,
                       ),
                       defaultFormField(
-                        initialValue: profile.userData != null ? profile.userData!.phone : 'Loading',
+                        initialValue: profile.userData != null
+                            ? profile.userData!.phone
+                            : 'Loading',
                         onValidate: (String? value) {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter Your Phone Number!!';
@@ -81,33 +85,20 @@ class SettingScreen extends StatelessWidget {
                         height: 20,
                       ),
                       defaultButton(
-                        function: () {
-                          if(formKey.currentState!.validate())
-                            {
-                              // ShopCubit.get(context).updateUserData(
-                              // name: nameController.text,
-                              // phone: phoneController.text,
-                              // email: emailController.text,
-                            // );
-
-                            }
-
-                        },
-                        text: 'update',
-                          radius: 30
-                      ),
-                      SizedBox(
-                        height: 20
-                      ),
+                          function: () {
+                            if (formKey.currentState!.validate()) {}
+                          },
+                          text: 'update',
+                          radius: 30),
+                      SizedBox(height: 20),
                       defaultButton(
                         function: () {
                           signOut(context);
                         },
                         text: 'logout',
-                          textColor:Colors.white,
+                        textColor: Colors.white,
                         radius: 30,
                         background: Colors.red.shade300,
-
                       ),
                     ],
                   ),

@@ -15,6 +15,9 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   UserModel? userData;
 
+
+
+
   void getUserDataFromFireStore() {
     if (FirebaseAuth.instance.currentUser?.uid != null) {
       final id = FirebaseAuth.instance.currentUser!.uid;
